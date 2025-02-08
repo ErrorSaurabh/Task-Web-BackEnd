@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
-
+const { v4: uuidv4 } = require('uuid');
 const ProjectSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+        default: uuidv4
+    },
     name: {
         type: String,
         required: true
@@ -21,11 +25,7 @@ const ProjectSchema = new mongoose.Schema({
         //type: mongoose.Schema.Types.ObjectId,
         type: String,
         ref: "User"
-    }],
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+    }]
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);

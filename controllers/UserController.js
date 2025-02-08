@@ -64,4 +64,13 @@ const Login = async (req, res) => {
     }
 };
 
-module.exports = {Register, Login};
+const getuser = async (req, res) => {
+    try {
+        let user = await User.find().populate("lead members");
+        res.json(user);
+    } catch (err) {
+        res.json({ msg: "Error in fetching projects" });
+    }
+};
+
+module.exports = {Register, Login,getuser};

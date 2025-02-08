@@ -1,13 +1,15 @@
+// IssueSchema.js
 const mongoose = require("mongoose");
-
+const { v4: uuidv4 } = require('uuid');
 const IssueSchema = new mongoose.Schema({
-    project: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Project",
-        required: true
-    },
-    summary: {
+    _id: {
         type: String,
+        default: uuidv4
+    },
+    project: {
+        //type: mongoose.Schema.Types.ObjectId,
+        type: String,
+        ref: "Project",
         required: true
     },
     description: {
@@ -29,28 +31,20 @@ const IssueSchema = new mongoose.Schema({
         required: true
     },
     assignee: {
-        type: mongoose.Schema.Types.ObjectId,
-        enum:["Admin", "Developer", "Manager"],
+        //type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "User"
     },
-    reporter: {
-        type: mongoose.Schema.Types.ObjectId,
-        enum:["Admin", "Developer", "Manager"],
-        ref: "User",
-        required: true
-    },
     comments: [{
-        type: mongoose.Schema.Types.ObjectId,
+        //type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "Comment"
     }],
     attachments: [{
-        type: mongoose.Schema.Types.ObjectId,
+        //type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "Attachment"
-    }],
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+    }]
 });
 
 module.exports = mongoose.model("Issue", IssueSchema);
