@@ -21,6 +21,6 @@ const CommentSchema = new mongoose.Schema({
         ref: 'Issue',
         required: true,
     }
-});
+},{ timestamps: true });
 
 module.exports = mongoose.model('Comment', CommentSchema);

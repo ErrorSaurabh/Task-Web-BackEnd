@@ -64,13 +64,16 @@ const Login = async (req, res) => {
     }
 };
 
-const getuser = async (req, res) => {
+const getUsersByRoles = async (req, res) => {
     try {
-        let user = await User.find().populate("lead members");
-        res.json(user);
+        const roles = req.query.roles ? req.query.roles.split(',') : []; // Expects roles as comma-separated values
+
+        const users = await User.find({ role: { $in: roles } });
+        res.json(users);
     } catch (err) {
-        res.json({ msg: "Error in fetching projects" });
+        console.error(err);
+        res.status(500).json({ msg: "Error fetching users" });
     }
 };
 
-module.exports = {Register, Login,getuser};
+module.exports = {Register, Login, getUsersByRoles};

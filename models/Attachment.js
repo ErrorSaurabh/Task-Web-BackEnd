@@ -25,7 +25,7 @@ const AttachmentSchema = new mongoose.Schema({
         ref: 'Issue',
         required: true
     }
-});
+},{ timestamps: true });
 
 module.exports = mongoose.model('Attachment', AttachmentSchema);
 

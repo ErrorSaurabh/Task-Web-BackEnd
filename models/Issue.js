@@ -45,6 +45,6 @@ const IssueSchema = new mongoose.Schema({
         type: String,
         ref: "Attachment"
     }]
-});
+},{ timestamps: true });
 
 module.exports = mongoose.model("Issue", IssueSchema);
