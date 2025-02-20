@@ -4,12 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const Register = async (req, res) => {
     try {
-        // const user = await User.findById(req.body._id);
-        // if (user) {
-        //     return res.json({ msg: "Check email" });
-        // }
-
-        // Check if email already exists
         const existingUser = await User.findOne({ email: req.body.email });
         if (existingUser) {
             return res.status(400).json({ msg: "Email already registered" });
@@ -29,19 +23,6 @@ const Register = async (req, res) => {
 
 const Login = async (req, res) => {
     try {
-       // const user = await User.findById({ "_id": req.body._id }); 
-        //if (user) {
-            // const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
-            // if (isPasswordValid) {
-            //     res.json({ 
-            //         token: jwt.sign({ "_id": user._id }, "abcd"), 
-            //         _id: user._id, 
-            //         name: user.name, 
-            //         role: user.role 
-            //     });
-            // } 
-            
-        // 1. Find the user by email
         const user = await User.findOne({ email: req.body.email });
         if (user) {
             const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
