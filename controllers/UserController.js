@@ -15,7 +15,7 @@ const Register = async (req, res) => {
 
         res.json({ msg: "Account created" });
     } catch (err) {
-        //console.error(err);
+
         res.json({ msg: "Registration error" });
     }
 };
@@ -47,7 +47,7 @@ const Login = async (req, res) => {
 
 const getUsersByRoles = async (req, res) => {
     try {
-        const roles = req.query.roles ? req.query.roles.split(',') : []; // Expects roles as comma-separated values
+        const roles = req.query.roles ? req.query.roles.split(',') : []; 
 
         const users = await User.find({ role: { $in: roles } });
         res.json(users);
